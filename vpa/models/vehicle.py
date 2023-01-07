@@ -17,6 +17,7 @@ class Vehicle(models.Model):
     )
 
     _id = models.AutoField(primary_key=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
     type = models.CharField(max_length=5, choices=VEHICLES_CHOICES,
                             default=VEHICLE_CHOICE_CAR,
                             blank=True)
@@ -24,6 +25,8 @@ class Vehicle(models.Model):
     model = models.CharField(max_length=50,  blank=True)
     model_spec = models.CharField(max_length=50, null=True, blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    created_at = models.DateField(auto_now_add=True, null=True, blank=True)
 
 
 class VehicleDetails(models.Model):
