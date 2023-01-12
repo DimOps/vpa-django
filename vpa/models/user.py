@@ -10,3 +10,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=50, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     created_at = models.DateField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        repr_string = f'{self.username} {self.email} {self.first_name} {self.last_name}'
+        return repr_string
