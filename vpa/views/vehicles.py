@@ -1,10 +1,11 @@
 from rest_framework import generics as views
-from vpa.models.vehicle import Vehicle, VehicleDetails
+from vpa.models.vehicle import Vehicle
 from vpa.models.user import User
 from vpa.serializers.vehicle_serializers import (VehicleListSerializer,
                                                  VehicleSerializer,
                                                  UserModelSerializer,
-                                                 VehicleDetailsSerializer,)
+                                                 VehicleInfoSerializer,
+                                                 )
 
 
 class ListUserVehiclesView(views.ListCreateAPIView):
@@ -46,8 +47,8 @@ class SingleUserView(views.RetrieveUpdateDestroyAPIView):
 
 
 class SingleCarDetailsView(views.RetrieveUpdateDestroyAPIView):
-    queryset = VehicleDetails.objects.all()
-    serializer_class = VehicleDetailsSerializer
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleInfoSerializer
 
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
@@ -57,5 +58,7 @@ class SingleCarDetailsView(views.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         self.lookup_url_kwarg = 'v_id'
-        queryset = self.queryset.filter(_id__exact=self.kwargs['v_id'])
+        queryset = self.queryset\
+            .filter(owner_id=self.kwargs['u_id'])\
+            .filter(_id__exact=self.kwargs['v_id'])
         return queryset.all()

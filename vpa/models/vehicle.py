@@ -68,36 +68,32 @@ class VehicleDetails(models.Model):
     engine = models.CharField(max_length=50, null=True, blank=True)
     engine_type = models.CharField(max_length=50, null=True, blank=True)
     engine_spec = models.CharField(max_length=50, null=True, blank=True)
-    chassis = models.BooleanField(default=False, blank=True)
-    exterior = models.BooleanField(default=False, blank=True)
-    interior = models.BooleanField(default=False, blank=True)
-    tuning = models.BooleanField(default=False, blank=True)
-    vehicle = models.ForeignKey(Vehicle, related_name='vehicle_header', default=1, on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(Vehicle, related_name='vehicle_details', default=1, on_delete=models.CASCADE)
 
 
 class Chassis(models.Model):
     _id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
-    details = models.ForeignKey(Vehicle, related_name='details_chassis', default=1, on_delete=models.CASCADE)
+    details = models.ForeignKey(Vehicle, related_name='chassis_details', default=1, on_delete=models.CASCADE)
 
 
 class Exterior(models.Model):
     _id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
-    details = models.ForeignKey(Vehicle, related_name='details_exterior', default=1, on_delete=models.CASCADE)
+    details = models.ForeignKey(Vehicle, related_name='exterior_details', default=1, on_delete=models.CASCADE)
 
 
 class Interior(models.Model):
     _id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
-    details = models.ForeignKey(Vehicle, related_name='details_interior', default=1, on_delete=models.CASCADE)
+    details = models.ForeignKey(Vehicle, related_name='interior_details', default=1, on_delete=models.CASCADE)
 
 
 class Tuning(models.Model):
     _id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
-    details = models.ForeignKey(Vehicle, related_name='details_tuning', default=1, on_delete=models.CASCADE)
+    details = models.ForeignKey(Vehicle, related_name='tuning_details', default=1, on_delete=models.CASCADE)
