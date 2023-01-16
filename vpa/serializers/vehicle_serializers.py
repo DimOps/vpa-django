@@ -31,18 +31,8 @@ class DataVehicleSerializer(serializers.ModelSerializer):
         fields = ('_id', 'brand', 'model', 'model_spec')
 
 
-class UsersListSerializer(serializers.ModelSerializer):
-
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'VEHICLES')
-
-    VEHICLES = DataVehicleSerializer(many=True, read_only=True)
-
-
 class UserModelSerializer(serializers.ModelSerializer):
-    VEHICLES = DataVehicleSerializer(many=True, read_only=True)
+    owner_vehicles = DataVehicleSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
