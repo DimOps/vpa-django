@@ -14,8 +14,8 @@ urlpatterns = (
     path('<int:u_id>/vehicles/', ListUserVehiclesView.as_view(), name='all-vehicles'),
     path('<int:u_id>/vehicles/<int:v_id>/', SingleCarView.as_view(), name='single-user-vehicles'),
     path('<int:u_id>/vehicles/<int:v_id>/details/', SingleCarDetailsView.as_view(), name='vehicle-details'),
-    path('<int:u_id>/vehicles/<int:v_id>/record/', MaintenanceRecordsView.as_view(), name='single-user-car'),
-    path('<int:u_id>/vehicles/<int:v_id>/vehicle-care/', VehicleCareView.as_view(), name='single-user-car'),
-    path('<int:u_id>/vehicles/<int:v_id>/to-fix/', ToFixView.as_view(), name='single-user-car'),
-    path('<int:u_id>/vehicles/<int:v_id>/notes/', VehicleNotesView.as_view(), name='single-user-vehicle'),
+    path('<int:u_id>/vehicles/<int:v_id>/record/', MaintenanceRecordsView.as_view(), name='vehicle-record'),
+    path('<int:u_id>/vehicles/<int:v_id>/vehicle-care/', VehicleCareView.as_view(), name='vehicle-care'),
+    path('<int:u_id>/vehicles/<int:v_id>/to-fix/', ToFixView.as_view(), name='vehicle-to-fix'),
+    path('<int:u_id>/vehicles/<int:v_id>/notes/', VehicleNotesView.as_view(), name='vehicle-notes'),
 )
