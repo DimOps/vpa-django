@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, viewsets
 from vpa.models.vehicle import Vehicle, VehicleDetails, Chassis, Tuning, Exterior, Interior
 from vpa.models.user import User
 
@@ -6,7 +6,7 @@ from vpa.models.user import User
 class IdAndUsernameOwnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('_id', 'username')
+        fields = ('user_id', 'username')
 
 
 class VehicleListSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class VehicleListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vehicle
-        fields = ('_id', 'type', 'brand', 'model', 'model_spec', 'owner')
+        fields = ('v_id', 'type', 'brand', 'model', 'model_spec', 'owner')
 
 
 class VehicleSerializer(serializers.ModelSerializer):
@@ -22,13 +22,13 @@ class VehicleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vehicle
-        fields = ('_id', 'type', 'brand', 'model', 'owner')
+        fields = ('v_id', 'type', 'brand', 'model', 'category', 'owner')
 
 
 class DataVehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
-        fields = ('_id', 'brand', 'model', 'model_spec')
+        fields = ('v_id', 'brand', 'model', 'model_spec')
 
 
 class UserModelSerializer(serializers.ModelSerializer):

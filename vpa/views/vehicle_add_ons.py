@@ -18,7 +18,7 @@ class MaintenanceRecordsView(views.ListAPIView):
 
     def get_queryset(self):
         self.lookup_url_kwarg = 'v_id'
-        queryset = self.queryset.filter(vehicle__owner___id__exact=self.kwargs['u_id'])\
+        queryset = self.queryset.filter(vehicle__owner__user_id__exact=self.kwargs['owner_id'])\
                                 .filter(vehicle_id__exact=self.kwargs['v_id'])
         return queryset.all()
 
