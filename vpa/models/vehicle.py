@@ -16,7 +16,17 @@ class Vehicle(models.Model):
         (VEHICLE_CHOICE_TRUCK, 'Truck'),
     )
 
-    _id = models.AutoField(primary_key=True, blank=True)
+    VEHICLE_CATEGORY_MAIN = 'Main vehicle'
+    VEHICLE_CATEGORY_TO_BUY = 'To buy'
+    VEHICLE_CATEGORY_TO_MAINTAIN = 'Vehicles'
+
+    VEHICLE_CATEGORIES = (
+        (VEHICLE_CATEGORY_MAIN, 'Main vehicle'),
+        (VEHICLE_CATEGORY_TO_BUY, 'To buy'),
+        (VEHICLE_CATEGORY_TO_MAINTAIN, 'Vehicles'),
+    )
+
+    v_id = models.AutoField(primary_key=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     type = models.CharField(max_length=5, choices=VEHICLES_CHOICES,
                             default=VEHICLE_CHOICE_CAR,
@@ -24,6 +34,9 @@ class Vehicle(models.Model):
     brand = models.CharField(max_length=50, blank=True)
     model = models.CharField(max_length=50,  blank=True)
     model_spec = models.CharField(max_length=50, null=True, blank=True)
+    category = models.CharField(max_length=12, choices=VEHICLE_CATEGORIES,
+                                default=VEHICLE_CATEGORY_TO_MAINTAIN,
+                                null=True, blank=True)
     owner = models.ForeignKey(User, related_name='owner_vehicles', on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     created_at = models.DateField(auto_now_add=True, null=True, blank=True)
@@ -55,7 +68,7 @@ class VehicleDetails(models.Model):
         (DRIVE_CHOICE_ALL, 'All-Wheel-Drive'),
     )
 
-    _id = models.AutoField(primary_key=True, blank=True)
+    vd_id = models.AutoField(primary_key=True, blank=True)
     horsepower = models.IntegerField(null=True, blank=True)
     transmission = models.CharField(max_length=14,
                                     choices=TRANSMISSION_CHOICES,
@@ -72,28 +85,28 @@ class VehicleDetails(models.Model):
 
 
 class Chassis(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    vch_id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
     details = models.ForeignKey(Vehicle, related_name='chassis_details', default=1, on_delete=models.CASCADE)
 
 
 class Exterior(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    vext_id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
     details = models.ForeignKey(Vehicle, related_name='exterior_details', default=1, on_delete=models.CASCADE)
 
 
 class Interior(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    vint_id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
     details = models.ForeignKey(Vehicle, related_name='interior_details', default=1, on_delete=models.CASCADE)
 
 
 class Tuning(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    vtun_id = models.AutoField(primary_key=True, blank=True)
     feature = models.CharField(max_length=30, blank=True)
     feature_value = models.CharField(max_length=20, null=True, blank=True)
     details = models.ForeignKey(Vehicle, related_name='tuning_details', default=1, on_delete=models.CASCADE)

@@ -2,7 +2,7 @@ from django.db import models
 
 
 class User(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    user_id = models.AutoField(primary_key=True, blank=True)
     username = models.CharField(max_length=50, default='GOAT', blank=True)
     password = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=100, null=True, blank=True)

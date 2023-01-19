@@ -18,7 +18,7 @@ class MaintenanceRecord(models.Model):
         (MAINTENANCE_ENHANCEMENT, 'Enhancement'),
     )
 
-    _id = models.AutoField(primary_key=True, blank=True)
+    mr_id = models.AutoField(primary_key=True, blank=True)
     reason = models.TextField(max_length=11, choices=MAINTENANCE_REASONS, blank=True)
     title = models.CharField(max_length=50, blank=True)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
@@ -27,7 +27,7 @@ class MaintenanceRecord(models.Model):
 
 
 class MaintenanceRecordDetails(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    mrd_id = models.AutoField(primary_key=True, blank=True)
     part_name = models.CharField(max_length=30, blank=True)
     brand = models.CharField(max_length=30, null=True, blank=True)
     volume = models.IntegerField(default=1, blank=True)
@@ -40,7 +40,7 @@ class MaintenanceRecordDetails(models.Model):
 
 
 class VehicleCare(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    vc_id = models.AutoField(primary_key=True, blank=True)
     title = models.CharField(max_length=50, blank=True)
     scheduled_for = models.DateTimeField(blank=True)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
@@ -49,7 +49,7 @@ class VehicleCare(models.Model):
 
 
 class VehicleCareDetails(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    vcd_id = models.AutoField(primary_key=True, blank=True)
     duration = models.CharField(max_length=30, blank=True)
     place = models.CharField(max_length=30, blank=True)
     cost = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
@@ -70,7 +70,7 @@ class ToFix(models.Model):
         (SECTION_CHOICE_TUNING, 'Tuning'),
     )
 
-    _id = models.AutoField(primary_key=True, blank=True)
+    tf_id = models.AutoField(primary_key=True, blank=True)
     area_to_fix = models.CharField(max_length=8,
                                    choices=SECTIONS_CHOICES,
                                    default='',
@@ -82,7 +82,7 @@ class ToFix(models.Model):
 
 
 class ToFixDetails(models.Model):
-    _id = models.AutoField(primary_key=True, blank=True)
+    tfd_id = models.AutoField(primary_key=True, blank=True)
     place = models.CharField(max_length=30, blank=True)
     estimated_cost = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
     comment = models.TextField(max_length=200, null=True, blank=True)
@@ -90,7 +90,7 @@ class ToFixDetails(models.Model):
 
 
 class Notes(models.Model):
-    _id = models.AutoField(primary_key=True)
+    n_id = models.AutoField(primary_key=True)
     note = models.TextField(max_length=300, blank=True)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
