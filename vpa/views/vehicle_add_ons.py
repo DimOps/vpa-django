@@ -42,7 +42,7 @@ class MaintenanceRecordDetailsView(views.RetrieveUpdateDestroyAPIView):
         super().__init__(**kwargs)
         self.multiple_lookup_fields = ('mrd_id',)
     # TODO:
-    # limit the URL
+    # restrain the URL
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
