@@ -2,11 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views
 
-from vpa.views.profile import RegisterProfile
+from vpa.views.profile import RegisterProfile, Logout
 
 urlpatterns = (
     path('admin/', admin.site.urls),
     path('', include('vpa.urls')),
     path('register/', RegisterProfile.as_view(), name='register'),
     path('login/', views.obtain_auth_token),
+    path('logout/', Logout.as_view(), name='logout'),
 )

@@ -1,6 +1,6 @@
 
 from django.contrib.auth.models import User
-from rest_framework import generics as views
+from rest_framework import generics as views, status
 from rest_framework.response import Response
 
 from vpa.serializers.profile_serializers import ProfileModelSerializer
@@ -29,6 +29,9 @@ class RegisterProfile(views.CreateAPIView):
             response = Response(data=f'User {user.username} is successfully created.', status=201)
             return response
 
-
-
+class Logout(views.DestroyAPIView):
+    def delete(self, request, *args, **kwargs):
+        a = request.user
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
