@@ -1,20 +1,27 @@
-from rest_framework import serializers, viewsets
+from django.contrib.auth.models import User
+from rest_framework import serializers
 from vpa.models.vehicle import Vehicle, VehicleDetails, Chassis, Tuning, Exterior, Interior
-from vpa.models.user import User
 
 
 class IdAndUsernameOwnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_id', 'username')
+        fields = ['username', 'email']
 
 
 class VehicleListSerializer(serializers.ModelSerializer):
-    owner = IdAndUsernameOwnerSerializer()
+    owner = User
 
     class Meta:
         model = Vehicle
         fields = ('v_id', 'type', 'brand', 'model', 'model_spec', 'owner')
+
+    def create(self, validated_data):
+        pk = self.context['request'].path.split('/')[1]
+
+        if pk != validated_data['owner'].user_id:
+            raise Exception('This user cannot create on behalf of someone else')
+        return Vehicle.objects.create(**validated_data)
 
 
 class VehicleSerializer(serializers.ModelSerializer):

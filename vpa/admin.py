@@ -1,14 +1,14 @@
 from django.contrib import admin
+# from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from vpa.models.user import User
-from vpa.models.vehicle import Vehicle
-
-
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    pass
+from vpa.models.vehicle import Vehicle, VehicleDetails
 
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(VehicleDetails)
+class VehicleDetailsAdmin(admin.ModelAdmin):
     pass

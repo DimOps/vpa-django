@@ -1,8 +1,9 @@
+from django.contrib.auth.models import User
 from rest_framework import generics as views
 from rest_framework.generics import get_object_or_404
 
 from vpa.models.vehicle import Vehicle
-from vpa.models.user import User
+
 from vpa.serializers.vehicle_serializers import (VehicleListSerializer,
                                                  UserModelSerializer,
                                                  VehicleInfoSerializer,
@@ -26,7 +27,7 @@ class ListUserVehiclesView(views.ListCreateAPIView):
         return super().post(*args, **kwargs)
 
     def get_queryset(self):
-        queryset = self.queryset.filter(owner__user_id=self.kwargs['owner_id'])
+        queryset = self.queryset.filter(owner__id=self.kwargs['owner_id'])
         return queryset.all()
 
 
